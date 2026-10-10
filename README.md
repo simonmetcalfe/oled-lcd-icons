@@ -79,7 +79,7 @@ display:
 
 For character LCDs, ESPHome defines custom glyphs in YAML (`user_characters:`), using the same 5-bit rows as `icons_5x8.h`.
 
-`examples/esphome_test.yaml` compiles the component from this checkout (`esphome compile examples/esphome_test.yaml`). It hasn't been run yet.
+`examples/esphome_test.yaml` compiles the component from GitHub (`esphome compile examples/esphome_test.yaml`). It pulls `main` on every compile (`refresh: always`), so push changes before testing them. It hasn't been run yet.
 
 ## Editing icons
 

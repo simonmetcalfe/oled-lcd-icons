@@ -1,9 +1,10 @@
-# Minimal ESPHome config for compile-testing the oli_icons component from this checkout:
-#   esphome compile examples/esphome_test.yaml
-# Real projects pull the repo instead:
+# Minimal ESPHome config for testing the oli_icons component.
+# It pulls main from GitHub on every compile (refresh: always).
+# Real projects can pin a release instead, e.g.:
 #   external_components:
 #     - source: github://simonmetcalfe/oled-lcd-icons@v0.1.0
 #       components: [oli_icons]
+# Replace the ESP board model and screen/I2C config with your own.
 
 esphome:
   name: oli-test
@@ -17,9 +18,11 @@ logger:
 
 external_components:
   - source:
-      type: local
-      path: ../components
+      type: git
+      url: https://github.com/simonmetcalfe/oled-lcd-icons.git
+      ref: main
     components: [oli_icons]
+    refresh: always
 
 oli_icons:
 
