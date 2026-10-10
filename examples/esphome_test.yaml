@@ -2,7 +2,7 @@
 #   esphome compile examples/esphome_test.yaml
 # Real projects pull the repo instead:
 #   external_components:
-#     - source: github://<github-user>/oled-lcd-icons@<tag>
+#     - source: github://simonmetcalfe/oled-lcd-icons@v0.1.0
 #       components: [oli_icons]
 
 esphome:

@@ -24,7 +24,13 @@ The bitmap sizes use row-major data, 1 bit per pixel, MSB = leftmost pixel, with
 
 ## Arduino / PlatformIO
 
-Add the repo to `platformio.ini`. While developing alongside it, use a symlink; otherwise use a git URL pinned to a tag:
+Add the repo to `lib_deps` in `platformio.ini`, pinned to a tag:
+
+```ini
+lib_deps = https://github.com/simonmetcalfe/oled-lcd-icons.git#v0.1.0
+```
+
+While developing alongside a local checkout, use a symlink instead:
 
 ```ini
 lib_deps = symlink://../oled-lcd-icons
@@ -55,7 +61,7 @@ Icons you don't use are dropped at build time. On AVR the data stays in flash (`
 
 ```yaml
 external_components:
-  - source: github://<github-user>/oled-lcd-icons@<tag>
+  - source: github://simonmetcalfe/oled-lcd-icons@v0.1.0
     components: [oli_icons]
 
 oli_icons:
@@ -99,7 +105,4 @@ To add a size, create `icons_<W>x<H>.h` with `namespace oli { namespace icons_<W
 
 MIT, see `LICENSE`.
 
-Some icons are based on:
-
-- [OLED-Icons-](https://github.com/MusicalCreeper01/OLED-Icons-) by Keith Mitchell: "Copyright (c) 2016 KeithM", MIT License.
-- [OLED Display Studio](https://dtechniker.github.io/OLED-Display-Studio/) ([source](https://github.com/dtechniker/OLED-Display-Studio)) by DTech. Its readme says "License: MIT - Free for private and commercial use.", but its `LICENSE` file is the GNU Affero General Public License v3.0, "Copyright (c) 2024 DTech (DTechiker)".
+With thanks to [OLED-Icons-](https://github.com/MusicalCreeper01/OLED-Icons-) by Keith Mitchell: "Copyright (c) 2016 KeithM", and [OLED Display Studio](https://dtechniker.github.io/OLED-Display-Studio/) ([source](https://github.com/dtechniker/OLED-Display-Studio)) by DTech.

@@ -93,6 +93,30 @@ static const uint8_t PROGMEM power[] = {
   0b00111000   // ..XXX...
 };
 
+// Sleep (crescent moon)
+static const uint8_t PROGMEM sleep[] = {
+  0b00011100,  // ...XXX..
+  0b01110000,  // .XXX....
+  0b01100000,  // .XX.....
+  0b11100000,  // XXX.....
+  0b11100000,  // XXX.....
+  0b11110000,  // XXXX....
+  0b01111110,  // .XXXXXX.
+  0b00111100   // ..XXXX..
+};
+
+// Mains power / plugged in
+static const uint8_t PROGMEM plug[] = {
+  0b00101000,  // ..X.X...
+  0b00101000,  // ..X.X...
+  0b01111100,  // .XXXXX..
+  0b01111100,  // .XXXXX..
+  0b01111100,  // .XXXXX..
+  0b00111000,  // ..XXX...
+  0b00010000,  // ...X....
+  0b00010000   // ...X....
+};
+
 static const uint8_t PROGMEM hourglass[] = {
   0b01111110,  // .XXXXXX.
   0b01111110,  // .XXXXXX.
@@ -161,6 +185,72 @@ static const uint8_t PROGMEM swapR[] = {
   0b11000001,  // XX.....X
   0b10100010,  // X.X...X.
   0b00011100   // ...XXX..
+};
+
+static const uint8_t PROGMEM plus[] = {
+  0b00010000,  // ...X....
+  0b00010000,  // ...X....
+  0b00010000,  // ...X....
+  0b11111110,  // XXXXXXX.
+  0b00010000,  // ...X....
+  0b00010000,  // ...X....
+  0b00010000,  // ...X....
+  0b00000000   // ........
+};
+
+static const uint8_t PROGMEM minus[] = {
+  0b00000000,  // ........
+  0b00000000,  // ........
+  0b00000000,  // ........
+  0b11111110,  // XXXXXXX.
+  0b00000000,  // ........
+  0b00000000,  // ........
+  0b00000000,  // ........
+  0b00000000   // ........
+};
+
+static const uint8_t PROGMEM tick[] = {
+  0b00000000,  // ........
+  0b00000010,  // ......X.
+  0b00000100,  // .....X..
+  0b10001000,  // X...X...
+  0b01010000,  // .X.X....
+  0b00100000,  // ..X.....
+  0b00000000,  // ........
+  0b00000000   // ........
+};
+
+static const uint8_t PROGMEM cross[] = {
+  0b10000010,  // X.....X.
+  0b01000100,  // .X...X..
+  0b00101000,  // ..X.X...
+  0b00010000,  // ...X....
+  0b00101000,  // ..X.X...
+  0b01000100,  // .X...X..
+  0b10000010,  // X.....X.
+  0b00000000   // ........
+};
+
+static const uint8_t PROGMEM checkboxTicked[] = {
+  0b11111110,  // XXXXXXX.
+  0b10000010,  // X.....X.
+  0b10001010,  // X...X.X.
+  0b11010010,  // XX.X..X.
+  0b10100010,  // X.X...X.
+  0b10000010,  // X.....X.
+  0b11111110,  // XXXXXXX.
+  0b00000000   // ........
+};
+
+static const uint8_t PROGMEM checkboxEmpty[] = {
+  0b11111110,  // XXXXXXX.
+  0b10000010,  // X.....X.
+  0b10000010,  // X.....X.
+  0b10000010,  // X.....X.
+  0b10000010,  // X.....X.
+  0b10000010,  // X.....X.
+  0b11111110,  // XXXXXXX.
+  0b00000000   // ........
 };
 
 /**
@@ -585,6 +675,18 @@ static const uint8_t PROGMEM link[] = {
   0b00000000   // ........
 };
 
+// Airplane mode
+static const uint8_t PROGMEM airplane[] = {
+  0b00010000,  // ...X....
+  0b00010000,  // ...X....
+  0b01111100,  // .XXXXX..
+  0b11111110,  // XXXXXXX.
+  0b00010000,  // ...X....
+  0b00010000,  // ...X....
+  0b00111000,  // ..XXX...
+  0b01111100   // .XXXXX..
+};
+
 /**
  * -------------------------------------------------------------------------------------------------
  * Other
@@ -733,6 +835,74 @@ static const uint8_t PROGMEM colour[] = {
   0b11111100,  // XXXXXX..
   0b01111000,  // .XXXX...
   0b00110000   // ..XX....
+};
+
+static const uint8_t PROGMEM bulbOn[] = {
+  0b00111000,  // ..XXX...
+  0b01000100,  // .X...X..
+  0b10000010,  // X.....X.
+  0b10000010,  // X.....X.
+  0b10000010,  // X.....X.
+  0b01000100,  // .X...X..
+  0b00111000,  // ..XXX...
+  0b00111000   // ..XXX...
+};
+
+// Bulb with a line through it, like Home Assistant's lightbulb-off-outline
+static const uint8_t PROGMEM bulbOff[] = {
+  0b00111000,  // ..XXX...
+  0b01000100,  // .X...X..
+  0b10100010,  // X.X...X.
+  0b10010010,  // X..X..X.
+  0b10001010,  // X...X.X.
+  0b01000100,  // .X...X..
+  0b00111000,  // ..XXX...
+  0b00111000   // ..XXX...
+};
+
+static const uint8_t PROGMEM cat[] = {
+  0b10000010,  // X.....X.
+  0b11000110,  // XX...XX.
+  0b11111110,  // XXXXXXX.
+  0b11010110,  // XX.X.XX.
+  0b11111110,  // XXXXXXX.
+  0b11111110,  // XXXXXXX.
+  0b01111100,  // .XXXXX..
+  0b00111000   // ..XXX...
+};
+
+// Blocked / not allowed
+static const uint8_t PROGMEM blocked[] = {
+  0b00111100,  // ..XXXX..
+  0b01000010,  // .X....X.
+  0b10100001,  // X.X....X
+  0b10010001,  // X..X...X
+  0b10001001,  // X...X..X
+  0b10000101,  // X....X.X
+  0b01000010,  // .X....X.
+  0b00111100   // ..XXXX..
+};
+
+static const uint8_t PROGMEM doorOpen[] = {
+  0b01111100,  // .XXXXX..
+  0b01100100,  // .XX..X..
+  0b01110100,  // .XXX.X..
+  0b01110100,  // .XXX.X..
+  0b01110100,  // .XXX.X..
+  0b01110100,  // .XXX.X..
+  0b01100100,  // .XX..X..
+  0b11111110   // XXXXXXX.
+};
+
+static const uint8_t PROGMEM doorClosed[] = {
+  0b01111100,  // .XXXXX..
+  0b01111100,  // .XXXXX..
+  0b01111100,  // .XXXXX..
+  0b01111100,  // .XXXXX..
+  0b01110100,  // .XXX.X..
+  0b01111100,  // .XXXXX..
+  0b01111100,  // .XXXXX..
+  0b11111110   // XXXXXXX.
 };
 
 /**

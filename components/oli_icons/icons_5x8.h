@@ -151,6 +151,30 @@ static const uint8_t PROGMEM power[] = {
   0b01110   // .XXX.
 };
 
+// Sleep (crescent moon)
+static const uint8_t PROGMEM sleep[] = {
+  0b00110,  // ..XX.
+  0b01100,  // .XX..
+  0b11000,  // XX...
+  0b11000,  // XX...
+  0b11000,  // XX...
+  0b11100,  // XXX..
+  0b01111,  // .XXXX
+  0b00110   // ..XX.
+};
+
+// Mains power / plugged in
+static const uint8_t PROGMEM plug[] = {
+  0b01010,  // .X.X.
+  0b01010,  // .X.X.
+  0b11111,  // XXXXX
+  0b11111,  // XXXXX
+  0b11111,  // XXXXX
+  0b01110,  // .XXX.
+  0b00100,  // ..X..
+  0b00100   // ..X..
+};
+
 static const uint8_t PROGMEM hourglass[] = {
   0b11111,  // XXXXX
   0b01110,  // .XXX.
@@ -195,6 +219,73 @@ static const uint8_t PROGMEM rotateR[] = {
   0b10000,  // X....
   0b10001,  // X...X
   0b01110   // .XXX.
+};
+
+static const uint8_t PROGMEM plus[] = {
+  0b00000,  // .....
+  0b00100,  // ..X..
+  0b00100,  // ..X..
+  0b11111,  // XXXXX
+  0b00100,  // ..X..
+  0b00100,  // ..X..
+  0b00000,  // .....
+  0b00000   // .....
+};
+
+static const uint8_t PROGMEM minus[] = {
+  0b00000,  // .....
+  0b00000,  // .....
+  0b00000,  // .....
+  0b11111,  // XXXXX
+  0b00000,  // .....
+  0b00000,  // .....
+  0b00000,  // .....
+  0b00000   // .....
+};
+
+static const uint8_t PROGMEM tick[] = {
+  0b00000,  // .....
+  0b00000,  // .....
+  0b00001,  // ....X
+  0b00010,  // ...X.
+  0b10100,  // X.X..
+  0b01000,  // .X...
+  0b00000,  // .....
+  0b00000   // .....
+};
+
+static const uint8_t PROGMEM cross[] = {
+  0b00000,  // .....
+  0b10001,  // X...X
+  0b01010,  // .X.X.
+  0b00100,  // ..X..
+  0b01010,  // .X.X.
+  0b10001,  // X...X
+  0b00000,  // .....
+  0b00000   // .....
+};
+
+// Tick cut out of a filled box: an outline leaves no room for one
+static const uint8_t PROGMEM checkboxTicked[] = {
+  0b00000,  // .....
+  0b11111,  // XXXXX
+  0b11101,  // XXX.X
+  0b10101,  // X.X.X
+  0b11011,  // XX.XX
+  0b11111,  // XXXXX
+  0b00000,  // .....
+  0b00000   // .....
+};
+
+static const uint8_t PROGMEM checkboxEmpty[] = {
+  0b00000,  // .....
+  0b11111,  // XXXXX
+  0b10001,  // X...X
+  0b10001,  // X...X
+  0b10001,  // X...X
+  0b11111,  // XXXXX
+  0b00000,  // .....
+  0b00000   // .....
 };
 
 /**
@@ -619,6 +710,18 @@ static const uint8_t PROGMEM link[] = {
   0b00000   // .....
 };
 
+// Airplane mode
+static const uint8_t PROGMEM airplane[] = {
+  0b00100,  // ..X..
+  0b00100,  // ..X..
+  0b01110,  // .XXX.
+  0b11111,  // XXXXX
+  0b00100,  // ..X..
+  0b00100,  // ..X..
+  0b01110,  // .XXX.
+  0b00000   // .....
+};
+
 /**
  * -------------------------------------------------------------------------------------------------
  * Other
@@ -767,6 +870,74 @@ static const uint8_t PROGMEM colour[] = {
   0b11110,  // XXXX.
   0b01110,  // .XXX.
   0b00000   // .....
+};
+
+static const uint8_t PROGMEM bulbOn[] = {
+  0b01110,  // .XXX.
+  0b10001,  // X...X
+  0b10001,  // X...X
+  0b10001,  // X...X
+  0b10001,  // X...X
+  0b01010,  // .X.X.
+  0b01110,  // .XXX.
+  0b01110   // .XXX.
+};
+
+// Bulb with a line through it, like Home Assistant's lightbulb-off-outline
+static const uint8_t PROGMEM bulbOff[] = {
+  0b01110,  // .XXX.
+  0b10001,  // X...X
+  0b11001,  // XX..X
+  0b10101,  // X.X.X
+  0b10011,  // X..XX
+  0b01010,  // .X.X.
+  0b01110,  // .XXX.
+  0b01110   // .XXX.
+};
+
+static const uint8_t PROGMEM cat[] = {
+  0b10001,  // X...X
+  0b11011,  // XX.XX
+  0b11111,  // XXXXX
+  0b10101,  // X.X.X
+  0b11111,  // XXXXX
+  0b11111,  // XXXXX
+  0b01110,  // .XXX.
+  0b00000   // .....
+};
+
+// Blocked / not allowed
+static const uint8_t PROGMEM blocked[] = {
+  0b01110,  // .XXX.
+  0b10001,  // X...X
+  0b11001,  // XX..X
+  0b10101,  // X.X.X
+  0b10101,  // X.X.X
+  0b10011,  // X..XX
+  0b10001,  // X...X
+  0b01110   // .XXX.
+};
+
+static const uint8_t PROGMEM doorOpen[] = {
+  0b11111,  // XXXXX
+  0b11001,  // XX..X
+  0b11101,  // XXX.X
+  0b11101,  // XXX.X
+  0b11101,  // XXX.X
+  0b11101,  // XXX.X
+  0b11001,  // XX..X
+  0b11111   // XXXXX
+};
+
+static const uint8_t PROGMEM doorClosed[] = {
+  0b11111,  // XXXXX
+  0b11111,  // XXXXX
+  0b11111,  // XXXXX
+  0b11101,  // XXX.X
+  0b11111,  // XXXXX
+  0b11111,  // XXXXX
+  0b11111,  // XXXXX
+  0b11111   // XXXXX
 };
 
 /**
