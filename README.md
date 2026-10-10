@@ -12,6 +12,7 @@ The library is header-only C++ for Arduino and PlatformIO. The same headers also
 |---|---|---|---|
 | `oli::icons_5x8` | `icons_5x8.h` | 5x8 | HD44780 custom characters (LCD1602, LCD2004) | 
 | `oli::icons_8x8` | `icons_8x8.h` | 8x8 | OLED status bars; Adafruit GFX size-1 text | 
+| `oli::icons_16x16` | `icons_16x16.h` | 16x16 | Larger OLED icons; Adafruit GFX size-2 text |
 | `oli::icons_5x3` | `icons_5x3.h` | 5x3 | Scrollbar and menu triangles on graphic displays | 
 
 Every size uses the same icon names, so code picks the size in one place:
@@ -75,11 +76,11 @@ display:
       oli::draw(it, 12, 0, oli::frame(ic::batterySet, oli::levelIndex(id(battery_pct), ic::batteryLevels)), ic::W, ic::H);
 ```
 
-`oli_icons:` loads the component, and ESPHome then makes its headers available in display lambdas. `oli::draw()` draws only the icon's "on" pixels; pass `COLOR_OFF` to draw a dark icon on a lit area.
+`oli_icons:` loads the component, and ESPHome then makes its headers available in display lambdas. Listing it under `external_components` isn't enough on its own: without `oli_icons:`, lambdas fail with `'oli' has not been declared`. `oli::draw()` draws only the icon's "on" pixels; pass `COLOR_OFF` to draw a dark icon on a lit area.
 
 For character LCDs, ESPHome defines custom glyphs in YAML (`user_characters:`), using the same 5-bit rows as `icons_5x8.h`.
 
-`examples/esphome_test.yaml` compiles the component from GitHub (`esphome compile examples/esphome_test.yaml`). It pulls `main` on every compile (`refresh: always`), so push changes before testing them. It hasn't been run yet.
+`examples/esphome_test_8x8.yaml` and `examples/esphome_test_16x16.yaml` compile the component from GitHub (`esphome compile examples/esphome_test_8x8.yaml`) and draw a screen of icons at that size. They pull `main` on every compile (`refresh: always`), so push changes before testing them. They haven't been run yet.
 
 ## Editing icons
 

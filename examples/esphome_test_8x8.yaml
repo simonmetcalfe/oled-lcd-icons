@@ -1,4 +1,5 @@
-# Minimal ESPHome config for testing the oli_icons component.
+# Minimal ESPHome config for testing the oli_icons component with the 8x8 icons.
+# esphome_test_16x16.yaml does the same for the 16x16 icons.
 # It pulls main from GitHub on every compile (refresh: always).
 # Real projects can pin a release instead, e.g.:
 #   external_components:
@@ -7,7 +8,7 @@
 # Replace the ESP board model and screen/I2C config with your own.
 
 esphome:
-  name: oli-test
+  name: oli-test-8x8
 
 esp32:
   board: esp32-s3-devkitc-1
@@ -24,6 +25,8 @@ external_components:
     components: [oli_icons]
     refresh: always
 
+# Required: loads the component so its headers are included in the build.
+# Without it, lambdas fail with "'oli' has not been declared".
 oli_icons:
 
 i2c:
