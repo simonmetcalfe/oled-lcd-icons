@@ -905,6 +905,18 @@ static const uint8_t PROGMEM doorClosed[] = {
   0b11111110   // XXXXXXX.
 };
 
+// Walking person, like Home Assistant's motion-sensor
+static const uint8_t PROGMEM motion[] = {
+  0b00001100,  // ....XX..
+  0b00001100,  // ....XX..
+  0b00111000,  // ..XXX...
+  0b01011100,  // .X.XXX..
+  0b00011010,  // ...XX.X.
+  0b00010100,  // ...X.X..
+  0b00100010,  // ..X...X.
+  0b01000000   // .X......
+};
+
 /**
  * -------------------------------------------------------------------------------------------------
  * Arrows (small)
