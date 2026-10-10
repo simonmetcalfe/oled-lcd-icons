@@ -1,0 +1,46 @@
+# Minimal ESPHome config for compile-testing the oli_icons component from this checkout:
+#   esphome compile examples/esphome_test.yaml
+# Real projects pull the repo instead:
+#   external_components:
+#     - source: github://<github-user>/oled-lcd-icons@<tag>
+#       components: [oli_icons]
+
+esphome:
+  name: oli-test
+
+esp32:
+  board: esp32-s3-devkitc-1
+  framework:
+    type: esp-idf
+
+logger:
+
+external_components:
+  - source:
+      type: local
+      path: ../components
+    components: [oli_icons]
+
+oli_icons:
+
+i2c:
+  sda: GPIO5
+  scl: GPIO6
+  frequency: 400kHz
+
+display:
+  - platform: ssd1306_i2c
+    model: "SH1106 128x64"
+    address: 0x3C
+    lambda: |-
+      namespace ic = oli::icons_8x8;
+      static uint8_t pct = 0;
+      pct = (pct + 5) % 105;
+      oli::draw(it, 0, 0, oli::frame(ic::batterySet, oli::levelIndex(pct, ic::batteryLevels)), ic::W, ic::H);
+      oli::draw(it, 12, 0, oli::frame(ic::wifiSet, oli::levelIndex(pct, ic::wifiLevels)), ic::W, ic::H);
+      oli::draw(it, 24, 0, oli::frame(ic::tankSet, oli::levelIndex(pct, ic::tankLevels)), ic::W, ic::H);
+      oli::draw(it, 36, 0, ic::lock, ic::W, ic::H);
+      oli::draw(it, 48, 0, ic::bluetooth, ic::W, ic::H);
+      oli::draw(it, 60, 0, ic::warning, ic::W, ic::H);
+      it.filled_rectangle(0, 16, 30, 12);
+      oli::draw(it, 2, 18, ic::home, ic::W, ic::H, COLOR_OFF);

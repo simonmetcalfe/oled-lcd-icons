@@ -1,0 +1,14 @@
+{
+  "name": "icons",
+  "version": "0.1.0",
+  "description": "Pixel icons for small monochrome OLED and HD44780 character LCD displays, in interchangeable sizes. Header-only; also an ESPHome external component.",
+  "keywords": ["icons", "bitmap", "oled", "lcd", "hd44780", "ssd1306", "sh1106", "esphome"],
+  "license": "MIT",
+  "frameworks": "*",
+  "platforms": "*",
+  "headers": "oli_icons.h",
+  "build": {
+    "srcDir": "components/oli_icons",
+    "includeDir": "components/oli_icons"
+  }
+}
