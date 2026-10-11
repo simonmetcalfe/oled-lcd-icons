@@ -764,6 +764,18 @@ static const uint8_t PROGMEM link[] = {
   0b00000   // .....
 };
 
+// Broken link: the two halves of link pulled apart
+static const uint8_t PROGMEM linkOff[] = {
+  0b11100,  // XXX..
+  0b10100,  // X.X..
+  0b10100,  // X.X..
+  0b00000,  // .....
+  0b00101,  // ..X.X
+  0b00101,  // ..X.X
+  0b00111,  // ..XXX
+  0b00000   // .....
+};
+
 // Airplane mode
 static const uint8_t PROGMEM airplane[] = {
   0b00100,  // ..X..
