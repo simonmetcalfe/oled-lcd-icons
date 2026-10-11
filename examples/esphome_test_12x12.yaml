@@ -1,0 +1,65 @@
+# Minimal ESPHome config for testing the oli_icons component with the 12x12 icons.
+# esphome_test_8x8.yaml and esphome_test_16x16.yaml do the same for the other sizes.
+# It draws 18 icons in a 6x3 grid. The battery, Wi-Fi and tank sets cycle through their levels,
+# home is drawn dark on a lit box, and the bottom row is glyph-like icons (rows 0-10 only).
+# It pulls main from GitHub on every compile (refresh: always).
+# Real projects can pin a release instead, e.g.:
+#   external_components:
+#     - source: github://simonmetcalfe/oled-lcd-icons@v0.1.0
+#       components: [oli_icons]
+# Replace the ESP board model and screen/I2C config with your own.
+
+esphome:
+  name: oli-test-12x12
+
+esp32:
+  board: esp32-s3-devkitc-1
+  framework:
+    type: esp-idf
+
+logger:
+
+external_components:
+  - source:
+      type: git
+      url: https://github.com/simonmetcalfe/oled-lcd-icons.git
+      ref: main
+    components: [oli_icons]
+    refresh: always
+
+# Required: loads the component so its headers are included in the build.
+# Without it, lambdas fail with "'oli' has not been declared".
+oli_icons:
+
+i2c:
+  sda: GPIO5
+  scl: GPIO6
+  frequency: 400kHz
+
+display:
+  - platform: ssd1306_i2c
+    model: "SH1106 128x64"
+    address: 0x3C
+    lambda: |-
+      namespace ic = oli::icons_12x12;
+      static uint8_t pct = 0;
+      pct = (pct + 5) % 105;
+      oli::draw(it, 0, 0, oli::frame(ic::batterySet, oli::levelIndex(pct, ic::batteryLevels)), ic::W, ic::H);
+      oli::draw(it, 20, 0, oli::frame(ic::wifiSet, oli::levelIndex(pct, ic::wifiLevels)), ic::W, ic::H);
+      oli::draw(it, 40, 0, oli::frame(ic::tankSet, oli::levelIndex(pct, ic::tankLevels)), ic::W, ic::H);
+      oli::draw(it, 60, 0, ic::lock, ic::W, ic::H);
+      oli::draw(it, 80, 0, ic::bluetooth, ic::W, ic::H);
+      oli::draw(it, 100, 0, ic::warning, ic::W, ic::H);
+      oli::draw(it, 0, 24, ic::motion, ic::W, ic::H);
+      oli::draw(it, 20, 24, ic::plant, ic::W, ic::H);
+      oli::draw(it, 40, 24, ic::waterDrop, ic::W, ic::H);
+      oli::draw(it, 60, 24, ic::clock, ic::W, ic::H);
+      oli::draw(it, 80, 24, ic::bulbOn, ic::W, ic::H);
+      it.filled_rectangle(98, 22, 16, 16);
+      oli::draw(it, 100, 24, ic::home, ic::W, ic::H, COLOR_OFF);
+      oli::draw(it, 0, 48, ic::tick, ic::W, ic::H);
+      oli::draw(it, 20, 48, ic::cross, ic::W, ic::H);
+      oli::draw(it, 40, 48, ic::checkboxTicked, ic::W, ic::H);
+      oli::draw(it, 60, 48, ic::checkboxEmpty, ic::W, ic::H);
+      oli::draw(it, 80, 48, ic::key, ic::W, ic::H);
+      oli::draw(it, 100, 48, ic::link, ic::W, ic::H);

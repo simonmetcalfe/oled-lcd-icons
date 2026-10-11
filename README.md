@@ -1,8 +1,8 @@
-# icons
+# oled-lcd-icons (OLI)
 
-Pixel icons for small monochrome displays: SSD1306/SH1106 OLEDs and HD44780 character LCDs. Each size is drawn by hand rather than scaled from vector icons, so the icons stay crisp at a few pixels tall.
+Pixel icons for small monochrome displays: SSD1306/SH1106 OLEDs and HD44780 character LCDs. Each size is drawn by hand (and AI) rather than scaled from vector icons, so the icons are always crisp.
 
-The library is header-only C++ for Arduino and PlatformIO. The same headers also work as an ESPHome external component.
+The library is header-only C++ for Arduino and PlatformIO, and also works as an ESPHome external component.
 
 ![Icon preview](docs/preview.svg)
 
@@ -12,6 +12,7 @@ The library is header-only C++ for Arduino and PlatformIO. The same headers also
 |---|---|---|---|
 | `oli::icons_5x8` | `icons_5x8.h` | 5x8 | HD44780 custom characters (LCD1602, LCD2004) | 
 | `oli::icons_8x8` | `icons_8x8.h` | 8x8 | OLED status bars; Adafruit GFX size-1 text | 
+| `oli::icons_12x12` | `icons_12x12.h` | 12x12 | Mid-size OLED icons with 1 px strokes; as wide as a size-2 Adafruit GFX character |
 | `oli::icons_16x16` | `icons_16x16.h` | 16x16 | Larger OLED icons; Adafruit GFX size-2 text |
 | `oli::icons_5x3` | `icons_5x3.h` | 5x3 | Scrollbar and menu triangles on graphic displays | 
 
@@ -80,7 +81,7 @@ display:
 
 For character LCDs, ESPHome defines custom glyphs in YAML (`user_characters:`), using the same 5-bit rows as `icons_5x8.h`.
 
-`examples/esphome_test_8x8.yaml` and `examples/esphome_test_16x16.yaml` compile the component from GitHub (`esphome compile examples/esphome_test_8x8.yaml`) and draw a screen of icons at that size. They pull `main` on every compile (`refresh: always`), so push changes before testing them. They haven't been run yet.
+`examples/esphome_test_8x8.yaml`, `examples/esphome_test_12x12.yaml` and `examples/esphome_test_16x16.yaml` compile the component from GitHub (`esphome compile examples/esphome_test_8x8.yaml`) and draw a screen of icons at that size. They pull `main` on every compile (`refresh: always`), so push changes before testing them. They haven't been run yet.
 
 ## Editing icons
 
