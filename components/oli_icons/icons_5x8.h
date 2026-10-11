@@ -221,6 +221,30 @@ static const uint8_t PROGMEM rotateR[] = {
   0b01110   // .XXX.
 };
 
+// Chevron left: step to the previous menu option
+static const uint8_t PROGMEM chevronLeft[] = {
+  0b00010,  // ...X.
+  0b00100,  // ..X..
+  0b01000,  // .X...
+  0b10000,  // X....
+  0b01000,  // .X...
+  0b00100,  // ..X..
+  0b00010,  // ...X.
+  0b00000   // .....
+};
+
+// Chevron right: step to the next menu option
+static const uint8_t PROGMEM chevronRight[] = {
+  0b01000,  // .X...
+  0b00100,  // ..X..
+  0b00010,  // ...X.
+  0b00001,  // ....X
+  0b00010,  // ...X.
+  0b00100,  // ..X..
+  0b01000,  // .X...
+  0b00000   // .....
+};
+
 static const uint8_t PROGMEM plus[] = {
   0b00000,  // .....
   0b00100,  // ..X..
