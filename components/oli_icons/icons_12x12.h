@@ -12,13 +12,6 @@
  *   display.drawBitmap(x, y, ic::lock, ic::W, ic::H, SSD1306_WHITE);  // Arduino, Adafruit GFX
  *   oli::draw(it, x, y, ic::lock, ic::W, ic::H);                      // ESPHome display lambda
  *
- * Strokes are 1 px. Icons are centred on column 5 and leave column 11 blank, so icons drawn side by
- * side have a 1 px gap. The exceptions use all 12 columns: the tank levels, like the 8x8 and 16x16
- * tanks, and the grain pattern, whose 4x4 grid of 3 px dots needs 12 px. Upright objects (plug,
- * hourglass, home, lock, unlock, link, airplane, plant, water drop, faucet, cup, music, flag, bulbs,
- * cat, doors, motion), the tank levels, the 5G-2G badges, the pattern, the rotate arrows and the
- * up/down arrows use all 12 rows. The rest sit on rows 0-10, centred on row 5.
- *
  * Sets list levels lowest first. For a 0-100 value:
  *   oli::frame(ic::wifiSet, oli::levelIndex(percent, ic::wifiLevels))
  * -------------------------------------------------------------------------------------------------

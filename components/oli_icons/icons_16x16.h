@@ -12,11 +12,6 @@
  *   display.drawBitmap(x, y, ic::lock, ic::W, ic::H, SSD1306_WHITE);  // Arduino, Adafruit GFX
  *   oli::draw(it, x, y, ic::lock, ic::W, ic::H);                      // ESPHome display lambda
  *
- * Strokes are 2 px. Icons are centred between columns 7 and 8. Glyph-like icons (key, brightness,
- * Wi-Fi, the left/right arrows and the small return arrow) sit on rows 0-13, the height of size-2
- * text, centred between rows 6 and 7. The rest use all 16 rows, including plus, minus, tick, cross
- * and the checkboxes, which fill the whole 16x16 area.
- *
  * Sets list levels lowest first. For a 0-100 value:
  *   oli::frame(ic::wifiSet, oli::levelIndex(percent, ic::wifiLevels))
  * -------------------------------------------------------------------------------------------------
@@ -1257,21 +1252,21 @@ static const uint8_t PROGMEM bulbOff[] = {
 
 static const uint8_t PROGMEM brightness[] = {
   0b00000001, 0b10000000,  // .......XX.......
-  0b00110001, 0b10001100,  // ..XX...XX...XX..
-  0b00111001, 0b10011100,  // ..XXX..XX..XXX..
-  0b00011000, 0b00011000,  // ...XX......XX...
+  0b01100001, 0b10000110,  // .XX....XX....XX.
+  0b01110001, 0b10001110,  // .XXX...XX...XXX.
+  0b00110000, 0b00001100,  // ..XX........XX..
   0b00000011, 0b11000000,  // ......XXXX......
   0b00000111, 0b11100000,  // .....XXXXXX.....
-  0b01110111, 0b11101110,  // .XXX.XXXXXX.XXX.
-  0b01110111, 0b11101110,  // .XXX.XXXXXX.XXX.
+  0b00001111, 0b11110000,  // ....XXXXXXXX....
+  0b11101111, 0b11110111,  // XXX.XXXXXXXX.XXX
+  0b11101111, 0b11110111,  // XXX.XXXXXXXX.XXX
+  0b00001111, 0b11110000,  // ....XXXXXXXX....
   0b00000111, 0b11100000,  // .....XXXXXX.....
   0b00000011, 0b11000000,  // ......XXXX......
-  0b00011000, 0b00011000,  // ...XX......XX...
-  0b00111001, 0b10011100,  // ..XXX..XX..XXX..
-  0b00110001, 0b10001100,  // ..XX...XX...XX..
-  0b00000001, 0b10000000,  // .......XX.......
-  0b00000000, 0b00000000,  // ................
-  0b00000000, 0b00000000   // ................
+  0b00110000, 0b00001100,  // ..XX........XX..
+  0b01110001, 0b10001110,  // .XXX...XX...XXX.
+  0b01100001, 0b10000110,  // .XX....XX....XX.
+  0b00000001, 0b10000000   // .......XX.......
 };
 
 static const uint8_t PROGMEM contrast[] = {
