@@ -816,14 +816,14 @@ static const uint8_t PROGMEM contrast[] = {
 
 // Material "grain"
 static const uint8_t PROGMEM pattern[] = {
-  0b11001100,  // XX..XX..
-  0b11001100,  // XX..XX..
-  0b00000000,  // ........
   0b00110011,  // ..XX..XX
   0b00110011,  // ..XX..XX
   0b00000000,  // ........
   0b11001100,  // XX..XX..
-  0b11001100   // XX..XX..
+  0b11001100,  // XX..XX..
+  0b00000000,  // ........
+  0b00110011,  // ..XX..XX
+  0b00110011   // ..XX..XX
 };
 
 static const uint8_t PROGMEM colour[] = {
@@ -879,6 +879,18 @@ static const uint8_t PROGMEM blocked[] = {
   0b10010001,  // X..X...X
   0b10001001,  // X...X..X
   0b10000101,  // X....X.X
+  0b01000010,  // .X....X.
+  0b00111100   // ..XXXX..
+};
+
+// Allowed: blocked without the slash
+static const uint8_t PROGMEM unblocked[] = {
+  0b00111100,  // ..XXXX..
+  0b01000010,  // .X....X.
+  0b10000001,  // X......X
+  0b10000001,  // X......X
+  0b10000001,  // X......X
+  0b10000001,  // X......X
   0b01000010,  // .X....X.
   0b00111100   // ..XXXX..
 };

@@ -918,6 +918,18 @@ static const uint8_t PROGMEM blocked[] = {
   0b01110   // .XXX.
 };
 
+// Allowed: blocked without the slash
+static const uint8_t PROGMEM unblocked[] = {
+  0b01110,  // .XXX.
+  0b10001,  // X...X
+  0b10001,  // X...X
+  0b10001,  // X...X
+  0b10001,  // X...X
+  0b10001,  // X...X
+  0b10001,  // X...X
+  0b01110   // .XXX.
+};
+
 static const uint8_t PROGMEM doorOpen[] = {
   0b11111,  // XXXXX
   0b11001,  // XX..X

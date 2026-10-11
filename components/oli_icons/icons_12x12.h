@@ -13,10 +13,11 @@
  *   oli::draw(it, x, y, ic::lock, ic::W, ic::H);                      // ESPHome display lambda
  *
  * Strokes are 1 px. Icons are centred on column 5 and leave column 11 blank, so icons drawn side by
- * side have a 1 px gap. The tank levels are the exception: they use all 12 columns, like the 8x8 and
- * 16x16 tanks. Upright objects (plug, hourglass, home, lock, unlock, link, airplane, plant, water
- * drop, faucet, cup, music, flag, bulbs, cat, doors, motion), the tank levels, the 5G-2G badges, the
- * rotate arrows and the up/down arrows use all 12 rows. The rest sit on rows 0-10, centred on row 5.
+ * side have a 1 px gap. The exceptions use all 12 columns: the tank levels, like the 8x8 and 16x16
+ * tanks, and the grain pattern, whose 4x4 grid of 3 px dots needs 12 px. Upright objects (plug,
+ * hourglass, home, lock, unlock, link, airplane, plant, water drop, faucet, cup, music, flag, bulbs,
+ * cat, doors, motion), the tank levels, the 5G-2G badges, the pattern, the rotate arrows and the
+ * up/down arrows use all 12 rows. The rest sit on rows 0-10, centred on row 5.
  *
  * Sets list levels lowest first. For a 0-100 value:
  *   oli::frame(ic::wifiSet, oli::levelIndex(percent, ic::wifiLevels))
@@ -217,13 +218,13 @@ static const uint8_t PROGMEM rotateR[] = {
 static const uint8_t PROGMEM swapL[] = {
   0b00011111, 0b00000000,  // ...XXXXX....
   0b10100000, 0b11000000,  // X.X.....XX..
-  0b11000000, 0b00000000,  // XX..........
-  0b11100000, 0b00000000,  // XXX.........
-  0b11110000, 0b00000000,  // XXXX........
+  0b11000000, 0b01000000,  // XX.......X..
+  0b11100000, 0b00100000,  // XXX.......X.
+  0b11110000, 0b00100000,  // XXXX......X.
   0b00000000, 0b00000000,  // ............
-  0b00000001, 0b11100000,  // .......XXXX.
-  0b00000000, 0b11100000,  // ........XXX.
-  0b00000000, 0b01100000,  // .........XX.
+  0b10000001, 0b11100000,  // X......XXXX.
+  0b10000000, 0b11100000,  // X.......XXX.
+  0b01000000, 0b01100000,  // .X.......XX.
   0b01100000, 0b10100000,  // .XX.....X.X.
   0b00011111, 0b00000000,  // ...XXXXX....
   0b00000000, 0b00000000   // ............
@@ -233,13 +234,13 @@ static const uint8_t PROGMEM swapL[] = {
 static const uint8_t PROGMEM swapR[] = {
   0b00011111, 0b00000000,  // ...XXXXX....
   0b01100000, 0b10100000,  // .XX.....X.X.
-  0b00000000, 0b01100000,  // .........XX.
-  0b00000000, 0b11100000,  // ........XXX.
-  0b00000001, 0b11100000,  // .......XXXX.
+  0b01000000, 0b01100000,  // .X.......XX.
+  0b10000000, 0b11100000,  // X.......XXX.
+  0b10000001, 0b11100000,  // X......XXXX.
   0b00000000, 0b00000000,  // ............
-  0b11110000, 0b00000000,  // XXXX........
-  0b11100000, 0b00000000,  // XXX.........
-  0b11000000, 0b00000000,  // XX..........
+  0b11110000, 0b00100000,  // XXXX......X.
+  0b11100000, 0b00100000,  // XXX.......X.
+  0b11000000, 0b01000000,  // XX.......X..
   0b10100000, 0b11000000,  // X.X.....XX..
   0b00011111, 0b00000000,  // ...XXXXX....
   0b00000000, 0b00000000   // ............
@@ -1082,18 +1083,18 @@ static const uint8_t PROGMEM contrast[] = {
 
 // Material "grain"
 static const uint8_t PROGMEM pattern[] = {
-  0b11001100, 0b11000000,  // XX..XX..XX..
-  0b11001100, 0b11000000,  // XX..XX..XX..
-  0b00000000, 0b00000000,  // ............
-  0b00110011, 0b00100000,  // ..XX..XX..X.
-  0b00110011, 0b00100000,  // ..XX..XX..X.
-  0b00000000, 0b00000000,  // ............
-  0b11001100, 0b11000000,  // XX..XX..XX..
-  0b11001100, 0b11000000,  // XX..XX..XX..
-  0b00000000, 0b00000000,  // ............
-  0b00110011, 0b00100000,  // ..XX..XX..X.
-  0b00110011, 0b00100000,  // ..XX..XX..X.
-  0b00000000, 0b00000000   // ............
+  0b00001000, 0b00100000,  // ....X.....X.
+  0b00011100, 0b01110000,  // ...XXX...XXX
+  0b00001000, 0b00100000,  // ....X.....X.
+  0b01000001, 0b00000000,  // .X.....X....
+  0b11100011, 0b10000000,  // XXX...XXX...
+  0b01000001, 0b00000000,  // .X.....X....
+  0b00001000, 0b00100000,  // ....X.....X.
+  0b00011100, 0b01110000,  // ...XXX...XXX
+  0b00001000, 0b00100000,  // ....X.....X.
+  0b01000001, 0b00000000,  // .X.....X....
+  0b11100011, 0b10000000,  // XXX...XXX...
+  0b01000001, 0b00000000   // .X.....X....
 };
 
 static const uint8_t PROGMEM colour[] = {
@@ -1168,6 +1169,22 @@ static const uint8_t PROGMEM blocked[] = {
   0b10000010, 0b00100000,  // X.....X...X.
   0b10000001, 0b00100000,  // X......X..X.
   0b01000000, 0b11000000,  // .X......XX..
+  0b01100000, 0b11000000,  // .XX.....XX..
+  0b00011111, 0b00000000,  // ...XXXXX....
+  0b00000000, 0b00000000   // ............
+};
+
+// Allowed: blocked without the slash
+static const uint8_t PROGMEM unblocked[] = {
+  0b00011111, 0b00000000,  // ...XXXXX....
+  0b01100000, 0b11000000,  // .XX.....XX..
+  0b01000000, 0b01000000,  // .X.......X..
+  0b10000000, 0b00100000,  // X.........X.
+  0b10000000, 0b00100000,  // X.........X.
+  0b10000000, 0b00100000,  // X.........X.
+  0b10000000, 0b00100000,  // X.........X.
+  0b10000000, 0b00100000,  // X.........X.
+  0b01000000, 0b01000000,  // .X.......X..
   0b01100000, 0b11000000,  // .XX.....XX..
   0b00011111, 0b00000000,  // ...XXXXX....
   0b00000000, 0b00000000   // ............
