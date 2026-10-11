@@ -13,8 +13,8 @@
  *   oli::draw(it, x, y, ic::lock, ic::W, ic::H);                      // ESPHome display lambda
  *
  * Strokes are 2 px. Icons are centred between columns 7 and 8. Glyph-like icons (plus, minus, tick,
- * cross, checkboxes, key, link, brightness, Wi-Fi, the left/right arrows and the small return arrow)
- * sit on rows 0-13, the height of size-2 text, centred between rows 6 and 7. The rest use all 16 rows.
+ * cross, checkboxes, key, brightness, Wi-Fi, the left/right arrows and the small return arrow) sit
+ * on rows 0-13, the height of size-2 text, centred between rows 6 and 7. The rest use all 16 rows.
  *
  * Sets list levels lowest first. For a 0-100 value:
  *   oli::frame(ic::wifiSet, oli::levelIndex(percent, ic::wifiLevels))
@@ -536,12 +536,12 @@ static const uint8_t PROGMEM batteryCharging[] = {
   0b11111111, 0b11111100,  // XXXXXXXXXXXXXX..
   0b11111111, 0b11111100,  // XXXXXXXXXXXXXX..
   0b11000000, 0b00001100,  // XX..........XX..
-  0b11000000, 0b11101100,  // XX......XXX.XX..
-  0b11000001, 0b11001111,  // XX.....XXX..XXXX
-  0b11000111, 0b11101111,  // XX...XXXXXX.XXXX
-  0b11011111, 0b10001111,  // XX.XXXXXX...XXXX
-  0b11001110, 0b00001111,  // XX..XXX.....XXXX
-  0b11011100, 0b00001100,  // XX.XXX......XX..
+  0b11000011, 0b10001100,  // XX....XXX...XX..
+  0b11000111, 0b00001111,  // XX...XXX....XXXX
+  0b11001111, 0b11001111,  // XX..XXXXXX..XXXX
+  0b11000011, 0b10001111,  // XX....XXX...XXXX
+  0b11000111, 0b00001111,  // XX...XXX....XXXX
+  0b11001110, 0b00001100,  // XX..XXX.....XX..
   0b11000000, 0b00001100,  // XX..........XX..
   0b11111111, 0b11111100,  // XXXXXXXXXXXXXX..
   0b11111111, 0b11111100,  // XXXXXXXXXXXXXX..
@@ -1085,22 +1085,22 @@ static const uint8_t PROGMEM key[] = {
 };
 
 static const uint8_t PROGMEM link[] = {
-  0b01111111, 0b10000000,  // .XXXXXXXX.......
-  0b01111111, 0b10000000,  // .XXXXXXXX.......
-  0b01100001, 0b10000000,  // .XX....XX.......
-  0b01100001, 0b10000000,  // .XX....XX.......
-  0b01100001, 0b10000000,  // .XX....XX.......
-  0b01100001, 0b11111110,  // .XX....XXXXXXXX.
-  0b01100001, 0b11111110,  // .XX....XXXXXXXX.
-  0b01111111, 0b10000110,  // .XXXXXXXX....XX.
-  0b01111111, 0b10000110,  // .XXXXXXXX....XX.
-  0b00000001, 0b10000110,  // .......XX....XX.
-  0b00000001, 0b10000110,  // .......XX....XX.
-  0b00000001, 0b10000110,  // .......XX....XX.
-  0b00000001, 0b11111110,  // .......XXXXXXXX.
-  0b00000001, 0b11111110,  // .......XXXXXXXX.
-  0b00000000, 0b00000000,  // ................
-  0b00000000, 0b00000000   // ................
+  0b00011111, 0b10000000,  // ...XXXXXX.......
+  0b00111111, 0b11000000,  // ..XXXXXXXX......
+  0b01110000, 0b11100000,  // .XXX....XXX.....
+  0b01100000, 0b01100000,  // .XX......XX.....
+  0b01100000, 0b01100000,  // .XX......XX.....
+  0b01100000, 0b01100000,  // .XX......XX.....
+  0b01100011, 0b01101100,  // .XX...XX.XX.XX..
+  0b01100111, 0b01101110,  // .XX..XXX.XX.XXX.
+  0b01110110, 0b11100110,  // .XXX.XX.XXX..XX.
+  0b00110110, 0b11000110,  // ..XX.XX.XX...XX.
+  0b00000110, 0b00000110,  // .....XX......XX.
+  0b00000110, 0b00000110,  // .....XX......XX.
+  0b00000110, 0b00000110,  // .....XX......XX.
+  0b00000111, 0b00001110,  // .....XXX....XXX.
+  0b00000011, 0b11111100,  // ......XXXXXXXX..
+  0b00000001, 0b11111000   // .......XXXXXX...
 };
 
 // Airplane mode
@@ -1117,10 +1117,10 @@ static const uint8_t PROGMEM airplane[] = {
   0b00000011, 0b11000000,  // ......XXXX......
   0b00000011, 0b11000000,  // ......XXXX......
   0b00000011, 0b11000000,  // ......XXXX......
+  0b00000011, 0b11000000,  // ......XXXX......
   0b00000111, 0b11100000,  // .....XXXXXX.....
   0b00001111, 0b11110000,  // ....XXXXXXXX....
-  0b00001111, 0b11110000,  // ....XXXXXXXX....
-  0b00000000, 0b00000000   // ................
+  0b00001111, 0b11110000   // ....XXXXXXXX....
 };
 
 /**
@@ -1206,9 +1206,9 @@ static const uint8_t PROGMEM faucet[] = {
 };
 
 static const uint8_t PROGMEM cup[] = {
-  0b01100000, 0b00000110,  // .XX..........XX.
-  0b01100000, 0b00000110,  // .XX..........XX.
-  0b01100000, 0b00000110,  // .XX..........XX.
+  0b01111111, 0b11111110,  // .XXXXXXXXXXXXXX.
+  0b01111111, 0b11111110,  // .XXXXXXXXXXXXXX.
+  0b01111111, 0b11111110,  // .XXXXXXXXXXXXXX.
   0b01111111, 0b11111110,  // .XXXXXXXXXXXXXX.
   0b01111111, 0b11111110,  // .XXXXXXXXXXXXXX.
   0b00111111, 0b11111100,  // ..XXXXXXXXXXXX..
@@ -1255,11 +1255,11 @@ static const uint8_t PROGMEM music[] = {
   0b00000110, 0b00000011,  // .....XX.......XX
   0b00000110, 0b00000011,  // .....XX.......XX
   0b00000110, 0b00000011,  // .....XX.......XX
-  0b00000110, 0b00000011,  // .....XX.......XX
   0b00011110, 0b00001111,  // ...XXXX.....XXXX
+  0b00111110, 0b00011111,  // ..XXXXX....XXXXX
   0b01111110, 0b00111111,  // .XXXXXX...XXXXXX
   0b01111110, 0b00111111,  // .XXXXXX...XXXXXX
-  0b01111000, 0b00111100   // .XXXX.....XXXX..
+  0b00111100, 0b00011110   // ..XXXX.....XXXX.
 };
 
 static const uint8_t PROGMEM book[] = {

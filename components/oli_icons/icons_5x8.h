@@ -795,12 +795,12 @@ static const uint8_t PROGMEM sound[] = {
 };
 
 static const uint8_t PROGMEM music[] = {
-  0b11110,  // XXXX.
-  0b11110,  // XXXX.
-  0b10010,  // X..X.
-  0b10010,  // X..X.
-  0b10010,  // X..X.
-  0b10010,  // X..X.
+  0b01111,  // .XXXX
+  0b01111,  // .XXXX
+  0b01001,  // .X..X
+  0b01001,  // .X..X
+  0b01001,  // .X..X
+  0b01001,  // .X..X
   0b11011,  // XX.XX
   0b11011   // XX.XX
 };

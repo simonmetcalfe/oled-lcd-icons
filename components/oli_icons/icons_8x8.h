@@ -665,14 +665,14 @@ static const uint8_t PROGMEM key[] = {
 };
 
 static const uint8_t PROGMEM link[] = {
-  0b11110000,  // XXXX....
-  0b10010000,  // X..X....
-  0b10011110,  // X..XXXX.
-  0b10010010,  // X..X..X.
-  0b11110010,  // XXXX..X.
-  0b00010010,  // ...X..X.
-  0b00011110,  // ...XXXX.
-  0b00000000   // ........
+  0b01110000,  // .XXX....
+  0b10001000,  // X...X...
+  0b10001000,  // X...X...
+  0b10011100,  // X..XXX..
+  0b01110010,  // .XXX..X.
+  0b00100010,  // ..X...X.
+  0b00100010,  // ..X...X.
+  0b00011100   // ...XXX..
 };
 
 // Airplane mode
@@ -760,14 +760,14 @@ static const uint8_t PROGMEM sound[] = {
 };
 
 static const uint8_t PROGMEM music[] = {
-  0b01111100,  // .XXXXX..
-  0b01111100,  // .XXXXX..
-  0b01000100,  // .X...X..
-  0b01000100,  // .X...X..
-  0b01000100,  // .X...X..
-  0b01110111,  // .XXX.XXX
-  0b01110111,  // .XXX.XXX
-  0b01110111   // .XXX.XXX
+  0b00111110,  // ..XXXXX.
+  0b00111110,  // ..XXXXX.
+  0b00100010,  // ..X...X.
+  0b00100010,  // ..X...X.
+  0b00100010,  // ..X...X.
+  0b11101110,  // XXX.XXX.
+  0b11101110,  // XXX.XXX.
+  0b11101110   // XXX.XXX.
 };
 
 static const uint8_t PROGMEM book[] = {
