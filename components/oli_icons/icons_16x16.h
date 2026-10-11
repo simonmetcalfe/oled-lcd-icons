@@ -12,9 +12,10 @@
  *   display.drawBitmap(x, y, ic::lock, ic::W, ic::H, SSD1306_WHITE);  // Arduino, Adafruit GFX
  *   oli::draw(it, x, y, ic::lock, ic::W, ic::H);                      // ESPHome display lambda
  *
- * Strokes are 2 px. Icons are centred between columns 7 and 8. Glyph-like icons (plus, minus, tick,
- * cross, checkboxes, key, brightness, Wi-Fi, the left/right arrows and the small return arrow) sit
- * on rows 0-13, the height of size-2 text, centred between rows 6 and 7. The rest use all 16 rows.
+ * Strokes are 2 px. Icons are centred between columns 7 and 8. Glyph-like icons (key, brightness,
+ * Wi-Fi, the left/right arrows and the small return arrow) sit on rows 0-13, the height of size-2
+ * text, centred between rows 6 and 7. The rest use all 16 rows, including plus, minus, tick, cross
+ * and the checkboxes, which fill the whole 16x16 area.
  *
  * Sets list levels lowest first. For a 0-100 value:
  *   oli::frame(ic::wifiSet, oli::levelIndex(percent, ic::wifiLevels))
@@ -302,16 +303,16 @@ static const uint8_t PROGMEM plus[] = {
   0b00000001, 0b10000000,  // .......XX.......
   0b00000001, 0b10000000,  // .......XX.......
   0b00000001, 0b10000000,  // .......XX.......
-  0b01111111, 0b11111110,  // .XXXXXXXXXXXXXX.
-  0b01111111, 0b11111110,  // .XXXXXXXXXXXXXX.
+  0b00000001, 0b10000000,  // .......XX.......
+  0b11111111, 0b11111111,  // XXXXXXXXXXXXXXXX
+  0b11111111, 0b11111111,  // XXXXXXXXXXXXXXXX
   0b00000001, 0b10000000,  // .......XX.......
   0b00000001, 0b10000000,  // .......XX.......
   0b00000001, 0b10000000,  // .......XX.......
   0b00000001, 0b10000000,  // .......XX.......
   0b00000001, 0b10000000,  // .......XX.......
   0b00000001, 0b10000000,  // .......XX.......
-  0b00000000, 0b00000000,  // ................
-  0b00000000, 0b00000000   // ................
+  0b00000001, 0b10000000   // .......XX.......
 };
 
 static const uint8_t PROGMEM minus[] = {
@@ -321,9 +322,9 @@ static const uint8_t PROGMEM minus[] = {
   0b00000000, 0b00000000,  // ................
   0b00000000, 0b00000000,  // ................
   0b00000000, 0b00000000,  // ................
-  0b01111111, 0b11111110,  // .XXXXXXXXXXXXXX.
-  0b01111111, 0b11111110,  // .XXXXXXXXXXXXXX.
   0b00000000, 0b00000000,  // ................
+  0b11111111, 0b11111111,  // XXXXXXXXXXXXXXXX
+  0b11111111, 0b11111111,  // XXXXXXXXXXXXXXXX
   0b00000000, 0b00000000,  // ................
   0b00000000, 0b00000000,  // ................
   0b00000000, 0b00000000,  // ................
@@ -336,11 +337,12 @@ static const uint8_t PROGMEM minus[] = {
 static const uint8_t PROGMEM tick[] = {
   0b00000000, 0b00000000,  // ................
   0b00000000, 0b00000000,  // ................
-  0b00000000, 0b00000110,  // .............XX.
+  0b00000000, 0b00000011,  // ..............XX
+  0b00000000, 0b00000111,  // .............XXX
   0b00000000, 0b00001110,  // ............XXX.
   0b00000000, 0b00011100,  // ...........XXX..
-  0b00000000, 0b00111000,  // ..........XXX...
-  0b01100000, 0b01110000,  // .XX......XXX....
+  0b11000000, 0b00111000,  // XX........XXX...
+  0b11100000, 0b01110000,  // XXX......XXX....
   0b01110000, 0b11100000,  // .XXX....XXX.....
   0b00111001, 0b11000000,  // ..XXX..XXX......
   0b00011111, 0b10000000,  // ...XXXXXX.......
@@ -348,13 +350,13 @@ static const uint8_t PROGMEM tick[] = {
   0b00000110, 0b00000000,  // .....XX.........
   0b00000000, 0b00000000,  // ................
   0b00000000, 0b00000000,  // ................
-  0b00000000, 0b00000000,  // ................
   0b00000000, 0b00000000   // ................
 };
 
 static const uint8_t PROGMEM cross[] = {
-  0b00000000, 0b00000000,  // ................
-  0b00110000, 0b00001100,  // ..XX........XX..
+  0b11000000, 0b00000011,  // XX............XX
+  0b11100000, 0b00000111,  // XXX..........XXX
+  0b01110000, 0b00001110,  // .XXX........XXX.
   0b00111000, 0b00011100,  // ..XXX......XXX..
   0b00011100, 0b00111000,  // ...XXX....XXX...
   0b00001110, 0b01110000,  // ....XXX..XXX....
@@ -365,48 +367,47 @@ static const uint8_t PROGMEM cross[] = {
   0b00001110, 0b01110000,  // ....XXX..XXX....
   0b00011100, 0b00111000,  // ...XXX....XXX...
   0b00111000, 0b00011100,  // ..XXX......XXX..
-  0b00110000, 0b00001100,  // ..XX........XX..
-  0b00000000, 0b00000000,  // ................
-  0b00000000, 0b00000000,  // ................
-  0b00000000, 0b00000000   // ................
+  0b01110000, 0b00001110,  // .XXX........XXX.
+  0b11100000, 0b00000111,  // XXX..........XXX
+  0b11000000, 0b00000011   // XX............XX
 };
 
 static const uint8_t PROGMEM checkboxTicked[] = {
-  0b01111111, 0b11111110,  // .XXXXXXXXXXXXXX.
-  0b01111111, 0b11111110,  // .XXXXXXXXXXXXXX.
-  0b01100000, 0b00000110,  // .XX..........XX.
-  0b01100000, 0b00110110,  // .XX.......XX.XX.
-  0b01100000, 0b01110110,  // .XX......XXX.XX.
-  0b01101000, 0b11100110,  // .XX.X...XXX..XX.
-  0b01101101, 0b11000110,  // .XX.XX.XXX...XX.
-  0b01101111, 0b10000110,  // .XX.XXXXX....XX.
-  0b01100111, 0b00000110,  // .XX..XXX.....XX.
-  0b01100010, 0b00000110,  // .XX...X......XX.
-  0b01100000, 0b00000110,  // .XX..........XX.
-  0b01100000, 0b00000110,  // .XX..........XX.
-  0b01111111, 0b11111110,  // .XXXXXXXXXXXXXX.
-  0b01111111, 0b11111110,  // .XXXXXXXXXXXXXX.
-  0b00000000, 0b00000000,  // ................
-  0b00000000, 0b00000000   // ................
+  0b11111111, 0b11111111,  // XXXXXXXXXXXXXXXX
+  0b11111111, 0b11111111,  // XXXXXXXXXXXXXXXX
+  0b11000000, 0b00000011,  // XX............XX
+  0b11000000, 0b00000011,  // XX............XX
+  0b11000000, 0b00011011,  // XX.........XX.XX
+  0b11000000, 0b00111011,  // XX........XXX.XX
+  0b11011000, 0b01110011,  // XX.XX....XXX..XX
+  0b11011100, 0b11100011,  // XX.XXX..XXX...XX
+  0b11001111, 0b11000011,  // XX..XXXXXX....XX
+  0b11000111, 0b10000011,  // XX...XXXX.....XX
+  0b11000011, 0b00000011,  // XX....XX......XX
+  0b11000000, 0b00000011,  // XX............XX
+  0b11000000, 0b00000011,  // XX............XX
+  0b11000000, 0b00000011,  // XX............XX
+  0b11111111, 0b11111111,  // XXXXXXXXXXXXXXXX
+  0b11111111, 0b11111111   // XXXXXXXXXXXXXXXX
 };
 
 static const uint8_t PROGMEM checkboxEmpty[] = {
-  0b01111111, 0b11111110,  // .XXXXXXXXXXXXXX.
-  0b01111111, 0b11111110,  // .XXXXXXXXXXXXXX.
-  0b01100000, 0b00000110,  // .XX..........XX.
-  0b01100000, 0b00000110,  // .XX..........XX.
-  0b01100000, 0b00000110,  // .XX..........XX.
-  0b01100000, 0b00000110,  // .XX..........XX.
-  0b01100000, 0b00000110,  // .XX..........XX.
-  0b01100000, 0b00000110,  // .XX..........XX.
-  0b01100000, 0b00000110,  // .XX..........XX.
-  0b01100000, 0b00000110,  // .XX..........XX.
-  0b01100000, 0b00000110,  // .XX..........XX.
-  0b01100000, 0b00000110,  // .XX..........XX.
-  0b01111111, 0b11111110,  // .XXXXXXXXXXXXXX.
-  0b01111111, 0b11111110,  // .XXXXXXXXXXXXXX.
-  0b00000000, 0b00000000,  // ................
-  0b00000000, 0b00000000   // ................
+  0b11111111, 0b11111111,  // XXXXXXXXXXXXXXXX
+  0b11111111, 0b11111111,  // XXXXXXXXXXXXXXXX
+  0b11000000, 0b00000011,  // XX............XX
+  0b11000000, 0b00000011,  // XX............XX
+  0b11000000, 0b00000011,  // XX............XX
+  0b11000000, 0b00000011,  // XX............XX
+  0b11000000, 0b00000011,  // XX............XX
+  0b11000000, 0b00000011,  // XX............XX
+  0b11000000, 0b00000011,  // XX............XX
+  0b11000000, 0b00000011,  // XX............XX
+  0b11000000, 0b00000011,  // XX............XX
+  0b11000000, 0b00000011,  // XX............XX
+  0b11000000, 0b00000011,  // XX............XX
+  0b11000000, 0b00000011,  // XX............XX
+  0b11111111, 0b11111111,  // XXXXXXXXXXXXXXXX
+  0b11111111, 0b11111111   // XXXXXXXXXXXXXXXX
 };
 
 /**
@@ -788,7 +789,7 @@ static const uint8_t PROGMEM tank4[] = {
   0b00110000, 0b00001100,  // ..XX........XX..
   0b00110000, 0b00001100,  // ..XX........XX..
   0b00110000, 0b00001100,  // ..XX........XX..
-  0b00110111, 0b11101100,  // ..XX.XXXXXX.XX..
+  0b00110000, 0b00001100,  // ..XX........XX..
   0b00110111, 0b11101100,  // ..XX.XXXXXX.XX..
   0b00110111, 0b11101100,  // ..XX.XXXXXX.XX..
   0b00110111, 0b11101100,  // ..XX.XXXXXX.XX..
@@ -805,7 +806,7 @@ static const uint8_t PROGMEM tank5[] = {
   0b11110000, 0b00001111,  // XXXX........XXXX
   0b11110000, 0b00001111,  // XXXX........XXXX
   0b00110000, 0b00001100,  // ..XX........XX..
-  0b00110111, 0b11101100,  // ..XX.XXXXXX.XX..
+  0b00110000, 0b00001100,  // ..XX........XX..
   0b00110111, 0b11101100,  // ..XX.XXXXXX.XX..
   0b00110111, 0b11101100,  // ..XX.XXXXXX.XX..
   0b00110111, 0b11101100,  // ..XX.XXXXXX.XX..
@@ -822,7 +823,7 @@ static const uint8_t PROGMEM tank5[] = {
 
 static const uint8_t PROGMEM tank6[] = {
   0b11110000, 0b00001111,  // XXXX........XXXX
-  0b11110111, 0b11101111,  // XXXX.XXXXXX.XXXX
+  0b11110000, 0b00001111,  // XXXX........XXXX
   0b00110111, 0b11101100,  // ..XX.XXXXXX.XX..
   0b00110111, 0b11101100,  // ..XX.XXXXXX.XX..
   0b00110111, 0b11101100,  // ..XX.XXXXXX.XX..
@@ -840,20 +841,20 @@ static const uint8_t PROGMEM tank6[] = {
 };
 
 static const uint8_t PROGMEM tank7[] = {
-  0b11111111, 0b11111111,  // XXXXXXXXXXXXXXXX
-  0b11111111, 0b11111111,  // XXXXXXXXXXXXXXXX
-  0b00111111, 0b11111100,  // ..XXXXXXXXXXXX..
-  0b00111111, 0b11111100,  // ..XXXXXXXXXXXX..
-  0b00111111, 0b11111100,  // ..XXXXXXXXXXXX..
-  0b00111111, 0b11111100,  // ..XXXXXXXXXXXX..
-  0b00111111, 0b11111100,  // ..XXXXXXXXXXXX..
-  0b00111111, 0b11111100,  // ..XXXXXXXXXXXX..
-  0b00111111, 0b11111100,  // ..XXXXXXXXXXXX..
-  0b00111111, 0b11111100,  // ..XXXXXXXXXXXX..
-  0b00111111, 0b11111100,  // ..XXXXXXXXXXXX..
-  0b00111111, 0b11111100,  // ..XXXXXXXXXXXX..
-  0b00111111, 0b11111100,  // ..XXXXXXXXXXXX..
-  0b00111111, 0b11111100,  // ..XXXXXXXXXXXX..
+  0b11110111, 0b11101111,  // XXXX.XXXXXX.XXXX
+  0b11110111, 0b11101111,  // XXXX.XXXXXX.XXXX
+  0b00110111, 0b11101100,  // ..XX.XXXXXX.XX..
+  0b00110111, 0b11101100,  // ..XX.XXXXXX.XX..
+  0b00110111, 0b11101100,  // ..XX.XXXXXX.XX..
+  0b00110111, 0b11101100,  // ..XX.XXXXXX.XX..
+  0b00110111, 0b11101100,  // ..XX.XXXXXX.XX..
+  0b00110111, 0b11101100,  // ..XX.XXXXXX.XX..
+  0b00110111, 0b11101100,  // ..XX.XXXXXX.XX..
+  0b00110111, 0b11101100,  // ..XX.XXXXXX.XX..
+  0b00110111, 0b11101100,  // ..XX.XXXXXX.XX..
+  0b00110111, 0b11101100,  // ..XX.XXXXXX.XX..
+  0b00110111, 0b11101100,  // ..XX.XXXXXX.XX..
+  0b00110000, 0b00001100,  // ..XX........XX..
   0b00111111, 0b11111100,  // ..XXXXXXXXXXXX..
   0b00111111, 0b11111100   // ..XXXXXXXXXXXX..
 };
