@@ -77,7 +77,7 @@ static const uint8_t PROGMEM question[] = {
 
 /**
  * -------------------------------------------------------------------------------------------------
- * Power / navigation
+ * Power
  * -------------------------------------------------------------------------------------------------
  */
 
@@ -116,6 +116,12 @@ static const uint8_t PROGMEM plug[] = {
   0b00010000,  // ...X....
   0b00010000   // ...X....
 };
+
+/**
+ * -------------------------------------------------------------------------------------------------
+ * Navigation
+ * -------------------------------------------------------------------------------------------------
+ */
 
 static const uint8_t PROGMEM hourglass[] = {
   0b01111110,  // .XXXXXX.
@@ -275,6 +281,30 @@ static const uint8_t PROGMEM checkboxEmpty[] = {
   0b10000010,  // X.....X.
   0b11111110,  // XXXXXXX.
   0b00000000   // ........
+};
+
+// Blocked / not allowed
+static const uint8_t PROGMEM blocked[] = {
+  0b00111100,  // ..XXXX..
+  0b01000010,  // .X....X.
+  0b10100001,  // X.X....X
+  0b10010001,  // X..X...X
+  0b10001001,  // X...X..X
+  0b10000101,  // X....X.X
+  0b01000010,  // .X....X.
+  0b00111100   // ..XXXX..
+};
+
+// Allowed: blocked without the slash
+static const uint8_t PROGMEM unblocked[] = {
+  0b00111100,  // ..XXXX..
+  0b01000010,  // .X....X.
+  0b10000001,  // X......X
+  0b10000001,  // X......X
+  0b10000001,  // X......X
+  0b10000001,  // X......X
+  0b01000010,  // .X....X.
+  0b00111100   // ..XXXX..
 };
 
 /**
@@ -713,6 +743,80 @@ static const uint8_t PROGMEM airplane[] = {
 
 /**
  * -------------------------------------------------------------------------------------------------
+ * Lighting
+ * -------------------------------------------------------------------------------------------------
+ */
+
+static const uint8_t PROGMEM bulbOn[] = {
+  0b00111000,  // ..XXX...
+  0b01000100,  // .X...X..
+  0b10000010,  // X.....X.
+  0b10000010,  // X.....X.
+  0b10000010,  // X.....X.
+  0b01000100,  // .X...X..
+  0b00111000,  // ..XXX...
+  0b00111000   // ..XXX...
+};
+
+// Bulb with a line through it, like Home Assistant's lightbulb-off-outline
+static const uint8_t PROGMEM bulbOff[] = {
+  0b00111000,  // ..XXX...
+  0b01000100,  // .X...X..
+  0b10100010,  // X.X...X.
+  0b10010010,  // X..X..X.
+  0b10001010,  // X...X.X.
+  0b01000100,  // .X...X..
+  0b00111000,  // ..XXX...
+  0b00111000   // ..XXX...
+};
+
+static const uint8_t PROGMEM brightness[] = {
+  0b00010000,  // ...X....
+  0b01010100,  // .X.X.X..
+  0b00111000,  // ..XXX...
+  0b11111110,  // XXXXXXX.
+  0b00111000,  // ..XXX...
+  0b01010100,  // .X.X.X..
+  0b00010000,  // ...X....
+  0b00000000   // ........
+};
+
+static const uint8_t PROGMEM contrast[] = {
+  0b00111100,  // ..XXXX..
+  0b01001110,  // .X..XXX.
+  0b10001111,  // X...XXXX
+  0b10001111,  // X...XXXX
+  0b10001111,  // X...XXXX
+  0b10001111,  // X...XXXX
+  0b01001110,  // .X..XXX.
+  0b00111100   // ..XXXX..
+};
+
+static const uint8_t PROGMEM colour[] = {
+  0b00111100,  // ..XXXX..
+  0b01101110,  // .XX.XXX.
+  0b10111011,  // X.XXX.XX
+  0b11111111,  // XXXXXXXX
+  0b10111110,  // X.XXXXX.
+  0b11111100,  // XXXXXX..
+  0b01111000,  // .XXXX...
+  0b00110000   // ..XX....
+};
+
+// Material "grain"
+static const uint8_t PROGMEM pattern[] = {
+  0b00110011,  // ..XX..XX
+  0b00110011,  // ..XX..XX
+  0b00000000,  // ........
+  0b11001100,  // XX..XX..
+  0b11001100,  // XX..XX..
+  0b00000000,  // ........
+  0b00110011,  // ..XX..XX
+  0b00110011   // ..XX..XX
+};
+
+/**
+ * -------------------------------------------------------------------------------------------------
  * Other
  * -------------------------------------------------------------------------------------------------
  */
@@ -816,74 +920,6 @@ static const uint8_t PROGMEM flag[] = {
   0b01000000   // .X......
 };
 
-static const uint8_t PROGMEM brightness[] = {
-  0b00010000,  // ...X....
-  0b01010100,  // .X.X.X..
-  0b00111000,  // ..XXX...
-  0b11111110,  // XXXXXXX.
-  0b00111000,  // ..XXX...
-  0b01010100,  // .X.X.X..
-  0b00010000,  // ...X....
-  0b00000000   // ........
-};
-
-static const uint8_t PROGMEM contrast[] = {
-  0b00111100,  // ..XXXX..
-  0b01001110,  // .X..XXX.
-  0b10001111,  // X...XXXX
-  0b10001111,  // X...XXXX
-  0b10001111,  // X...XXXX
-  0b10001111,  // X...XXXX
-  0b01001110,  // .X..XXX.
-  0b00111100   // ..XXXX..
-};
-
-// Material "grain"
-static const uint8_t PROGMEM pattern[] = {
-  0b00110011,  // ..XX..XX
-  0b00110011,  // ..XX..XX
-  0b00000000,  // ........
-  0b11001100,  // XX..XX..
-  0b11001100,  // XX..XX..
-  0b00000000,  // ........
-  0b00110011,  // ..XX..XX
-  0b00110011   // ..XX..XX
-};
-
-static const uint8_t PROGMEM colour[] = {
-  0b00111100,  // ..XXXX..
-  0b01101110,  // .XX.XXX.
-  0b10111011,  // X.XXX.XX
-  0b11111111,  // XXXXXXXX
-  0b10111110,  // X.XXXXX.
-  0b11111100,  // XXXXXX..
-  0b01111000,  // .XXXX...
-  0b00110000   // ..XX....
-};
-
-static const uint8_t PROGMEM bulbOn[] = {
-  0b00111000,  // ..XXX...
-  0b01000100,  // .X...X..
-  0b10000010,  // X.....X.
-  0b10000010,  // X.....X.
-  0b10000010,  // X.....X.
-  0b01000100,  // .X...X..
-  0b00111000,  // ..XXX...
-  0b00111000   // ..XXX...
-};
-
-// Bulb with a line through it, like Home Assistant's lightbulb-off-outline
-static const uint8_t PROGMEM bulbOff[] = {
-  0b00111000,  // ..XXX...
-  0b01000100,  // .X...X..
-  0b10100010,  // X.X...X.
-  0b10010010,  // X..X..X.
-  0b10001010,  // X...X.X.
-  0b01000100,  // .X...X..
-  0b00111000,  // ..XXX...
-  0b00111000   // ..XXX...
-};
-
 static const uint8_t PROGMEM cat[] = {
   0b10000010,  // X.....X.
   0b11000110,  // XX...XX.
@@ -893,30 +929,6 @@ static const uint8_t PROGMEM cat[] = {
   0b11111110,  // XXXXXXX.
   0b01111100,  // .XXXXX..
   0b00111000   // ..XXX...
-};
-
-// Blocked / not allowed
-static const uint8_t PROGMEM blocked[] = {
-  0b00111100,  // ..XXXX..
-  0b01000010,  // .X....X.
-  0b10100001,  // X.X....X
-  0b10010001,  // X..X...X
-  0b10001001,  // X...X..X
-  0b10000101,  // X....X.X
-  0b01000010,  // .X....X.
-  0b00111100   // ..XXXX..
-};
-
-// Allowed: blocked without the slash
-static const uint8_t PROGMEM unblocked[] = {
-  0b00111100,  // ..XXXX..
-  0b01000010,  // .X....X.
-  0b10000001,  // X......X
-  0b10000001,  // X......X
-  0b10000001,  // X......X
-  0b10000001,  // X......X
-  0b01000010,  // .X....X.
-  0b00111100   // ..XXXX..
 };
 
 static const uint8_t PROGMEM doorOpen[] = {
